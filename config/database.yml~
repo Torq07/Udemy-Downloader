@@ -41,7 +41,7 @@ production:
   encoding: unicode
   database: udemy_production
   pool: 5
-  username: torq07
+  username: pguser
   password:
 
 
