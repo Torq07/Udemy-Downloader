@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account_id: MyText
+  udemy_username: MyString
+  udemy_password: MyString
+
+two:
+  account_id: MyText
+  udemy_username: MyString
+  udemy_password: MyString

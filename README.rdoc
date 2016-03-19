@@ -1,7 +1,7 @@
 == README
 
-This is Udemy Downloader
-Created only for personal uses
-Base on Ruby-on-Rails framework
+* This is Udemy Downloader
+* Created only for personal uses
+* Base on Ruby-on-Rails framework
 
-<tt>rake doc:app</tt>.
+<tt>Torq07 inc.</tt>.
