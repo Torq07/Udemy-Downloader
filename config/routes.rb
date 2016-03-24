@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 		        sessions: 'users/sessions'
 						      }
 	root :to => 'courses#index'
+  get 'courses/pdf'
   resources :courses
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

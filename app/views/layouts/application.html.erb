@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Udemy</title>
+  <title>Udemy Downloader</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class='<%= controller.controller_name %>' >
+<div class="row" style="margin:0 0 15px">
+	<nav class="navbar-default">
+		<% if user_signed_in? %>
+			<div class="container-fluid">
+	      <a class="navbar-brand" href="#"><b>Udemy Downloader</b></a>
+	      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    		 	<div class="dropdown pull-right" style="margin: 8px 0 0;">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+					    <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					    <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+					    <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+					  </ul>
+					</div>
+					
+			    <form action="" class="navbar-form navbar-center">
+			    	<div class="form-group">
+			      	<input type="text" class="form-control" placeholder="Udemy Username">
+			    	</div>
+			    	<div class="form-group">    
+			        <input type="text" class="form-control" placeholder="Udemy Password">   
+			    	</div>
+						<button type="submit" class="btn btn-default">Login to Udemy</button>
+					</form>
+
+    		 	<!-- <p class="navbar-text pull-right"> -->
+						<!-- Logged in as <strong><%= current_user.email %></strong>. -->
+					<!-- </p>	 -->
+    		</div>	
+		  </div>  
+		<% end %>
+	</nav>
+</div>
+<% if notice %>
+	<p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+	<p class="alert alert-danger"><%= alert %></p>
+<% end %>
 
 <%= yield %>
 
