@@ -6,6 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
 module Udemy
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -21,12 +22,10 @@ module Udemy
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
+   
+
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
 
-def call_rake(task, options = {})
-  options[:rails_env] ||= Rails.env
-  args = options.map { |n, v| "#{n.to_s.upcase}='#{v}'" }
-  system "/usr/bin/rake #{task} #{args.join(' ')} --trace 2>&1 >> #{Rails.root}/log/rake.log &"
-end
+

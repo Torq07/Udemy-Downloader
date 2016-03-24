@@ -25,18 +25,24 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
-    @course = Course.new(course_params)
-    # call_rake :upload_course, :course_url => course_params['url']
-    system('rake upload course_url=https://www.udemy.com/become-an-android-developer-from-scratch/learn/ >/dev/null &')
-    respond_to do |format|
-      if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @course }
-      else
-        format.html { render :new }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+    p Course.find_by(url: course_params['url'].strip)
+    unless Course.find_by(url: course_params['url'].strip)
+      @course = Course.new(course_params)
+      @course.name = course_params['url'].split('/')[3].gsub('-',' ').capitalize
+      call_rake :upload, :course_url => course_params['url']
+      respond_to do |format|
+        if @course.save
+          format.html { redirect_to @course, notice: 'Course was successfully created.' }
+          format.json { render :show, status: :created, location: @course }
+        else
+          format.html { render :new }
+          format.json { render json: @course.errors, status: :unprocessable_entity }
+        end
       end
-    end
+    else
+      redirect_to :back,  alert: 'Course already exist'  
+      # render :new,
+    end  
   end
 
   # PATCH/PUT /courses/1
