@@ -2,9 +2,11 @@ Rails.application.routes.draw do
  	devise_for :users, controllers: {
 		        sessions: 'users/sessions'
 						      }
-	root :to => 'courses#index'
-  get 'courses/pdf'
+	root :to => 'courses#new'
+  post 'course/udemy'=>'courses#udemy'
+  post 'course/udemy_destroy'=>'courses#udemy_destroy'
   resources :courses
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

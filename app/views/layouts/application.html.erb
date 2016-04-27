@@ -12,7 +12,7 @@
 	<nav class="navbar-default">
 		<% if user_signed_in? %>
 			<div class="container-fluid">
-	      <a class="navbar-brand" href="#"><b>Udemy Downloader</b></a>
+			  <b><%= link_to 'Udemy Downloader' ,root_path , class:"navbar-brand" %></b>
 	      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     		 	<div class="dropdown pull-right" style="margin: 8px 0 0;">
 					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -24,7 +24,39 @@
 					    <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
 					  </ul>
 					</div>
-					
+					<% if @udemy_account %>
+							<%= form_for :udemy_account, url:course_udemy_destroy_path, :html=>{:class => "navbar-form navbar-center", role:"form"} do |f|%>
+								<div class="form-group">
+			            <div class="actions">
+			              <%= f.submit "Logout #{@udemy_account.udemy_username}" , class: 'btn btn-danger btn-block' %>
+			            </div>
+			          </div>
+							<% end %>
+
+						<% else %>
+
+					 	<%= form_for :udemy_account, url:course_udemy_path, :html=>{:class => "navbar-form navbar-center", role:"form"} do |f| %>
+								<div class="form-group">
+			            <div class="field">
+			              <%= f.text_field :udemy_username, class:"form-control" %>
+			            </div>
+			          </div>
+
+			          <div class="form-group">
+			            <div class="field">
+			              <%= f.text_field :udemy_password, class:"form-control" %>
+			            </div>
+			          </div>
+			    
+			          <div class="form-group">
+			            <div class="actions">
+			              <%= f.submit "Login to Udemy" , class: 'btn btn-default btn-block' %>
+			            </div>
+			          </div>
+						<% end %>
+					<% end %>
+<!-- 
+
 			    <form action="" class="navbar-form navbar-center">
 			    	<div class="form-group">
 			      	<input type="text" class="form-control" placeholder="Udemy Username">
@@ -33,7 +65,7 @@
 			        <input type="text" class="form-control" placeholder="Udemy Password">   
 			    	</div>
 						<button type="submit" class="btn btn-default">Login to Udemy</button>
-					</form>
+					</form> -->
 
     		 	<!-- <p class="navbar-text pull-right"> -->
 						<!-- Logged in as <strong><%= current_user.email %></strong>. -->

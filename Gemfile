@@ -8,6 +8,7 @@ gem 'rails', '4.2.5.1'
 gem 'pg'
 gem 'sqlite3'
 gem 'taps'
+gem 'mechanize', '~> 2.7', '>= 2.7.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'devise'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319110708) do
+ActiveRecord::Schema.define(version: 20160404090212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,15 +21,38 @@ ActiveRecord::Schema.define(version: 20160319110708) do
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "upload"
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.integer  "course_id"
+    t.text     "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sections", ["course_id"], name: "index_sections_on_course_id", using: :btree
+
+  create_table "tutorials", force: :cascade do |t|
+    t.integer  "section_id"
+    t.text     "name"
+    t.text     "link"
+    t.text     "file_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tutorials", ["section_id"], name: "index_tutorials_on_section_id", using: :btree
+
   create_table "udemy_accounts", force: :cascade do |t|
-    t.text     "account_id"
     t.string   "udemy_username"
     t.string   "udemy_password"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "user_id"
   end
+
+  add_index "udemy_accounts", ["user_id"], name: "index_udemy_accounts_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -49,4 +72,6 @@ ActiveRecord::Schema.define(version: 20160319110708) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "sections", "courses"
+  add_foreign_key "tutorials", "sections"
 end
